@@ -1,0 +1,72 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:Icon="sap.ui.core.Icon" controllerName="project1.controller.View"><Page id="bookStorePage" title="BookStore" backgroundDesign="Solid">
+        <headerContent>
+          
+           
+          
+            <Image src="data:image/png;base64,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" width="40px" height="40px" id="image1" busyIndicatorSize="Small"/>
+        </headerContent>
+
+        <content><OverflowToolbar width="100%" id="toolbar1">
+               <content>
+                   <ToolbarSpacer id="spacer0"/>
+                    <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="true" press="onDelete"/>
+                   <Button id="editModeButton" tooltip="Edit" press="onEditMode" text="Edit"/>
+                   <Button id="btnCreateBook" text="Create" press="onCreate"/>
+               </content>
+           </OverflowToolbar>
+           <Table id="bookTable" mode="MultiSelect" items="{/Books}" selectionChange="onRowSelectionChange">
+
+                <columns>
+                    <Column id="colID">
+                        <Text id="txtColID" text="ID"/>
+                    </Column>
+                    <Column id="colTitle">
+                        <Text id="txtColTitle" text="Title"/>
+                    </Column>
+                    <Column id="colAuthor">
+                        <Text id="txtColAuthor" text="Author"/>
+                    </Column>
+                    <Column id="colPrice">
+                        <Text id="txtColPrice" text="Price"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="bookRow">
+                        <cells>
+                            <Text id="txtID" text="{ID}"/>
+                            <Text id="txtTitle" text="{title}"/>
+                            <Text id="txtAuthor" text="{author}"/>
+                            <Text id="txtPrice" text="{price}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+
+        <dependents>
+            <Dialog id="OpenDialog" title="Add New Book">
+                <buttons>
+                    <Button id="confirmCreate" text="Save" press="onSave" type="Emphasized"/>
+                    <Button id="cancelCreate" text="Cancel" press="onClose" type="Transparent"/>
+                </buttons>
+                <form:SimpleForm id="bookForm" editable="true" layout="ResponsiveGridLayout">
+                    <form:content>
+                        <Label id="lblID" text="ID" required="true"/>
+                        <Input id="inpID"/>
+
+                        <Label id="lblTitle" text="Title" required="true"/>
+                        <Input id="inpTitle"/>
+                        
+                        <Label id="lblAuthor" text="Author" required="true"/>
+                        <Input id="inpAuthor"/>
+                        
+                        <Label id="lblPrice" text="Price" required="true"/>
+                        <Input id="inpPrice"/>
+                    </form:content>
+                </form:SimpleForm>
+            </Dialog>
+        </dependents>
+    <customHeader>
+    </customHeader>
+    </Page>
+</mvc:View>
