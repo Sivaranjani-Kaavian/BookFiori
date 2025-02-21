@@ -96,6 +96,12 @@
           "target": [
             "TargetView"
           ]
+        },
+        {
+          "name": "migrate",
+          "pattern": "",
+          "target": [
+            "TargetView"]
         }
       ],
       "targets": {

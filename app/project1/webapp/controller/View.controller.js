@@ -3,18 +3,18 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/ColumnListItem",
     "sap/m/Input"
-], function (Controller, MessageToast, ColumnListItem, Input) {
+], function (Controller, MessageToast) {
     "use strict";
 
     return Controller.extend("project1.controller.View", {
 
         onInit: function () {
-            this._oTable = this.byId("bookTable");
+            this._oTable = this.byId("bookTable"); 
             this._oEditContext = null; // Track edit context
         },
 
         onCreate: function () {
-            this._oEditContext = null; // Reset edit mode
+            this._oEditContext = null; 
             this.getView().byId("OpenDialog").open();
         },
 
@@ -28,13 +28,17 @@ sap.ui.define([
             var oAuthor = this.getView().byId("inpAuthor").getValue();
             var oPrice = this.getView().byId("inpPrice").getValue();
 
+
             if (oTitle === "" || oAuthor === "" || oPrice === "") {
                 MessageToast.show("All fields are required.");
                 return;
             }
 
-            const oList = this._oTable;
+            const oList = this._oTable; //this otable in abive we grt through an booktable id 
+            console.log(this._oTable);
+            console.log(oList);
             const oBinding = oList.getBinding("items");
+            console.log(oBinding);
 
             if (this._oEditContext) {
                 // **Update Existing Entry**
@@ -45,13 +49,14 @@ sap.ui.define([
                 MessageToast.show("Book details updated successfully.");
             } else {
                 // **Create New Entry**
+                //in an oBinding we get the data of table by binding them using an model
                 oBinding.create({
                     "ID": oID,
                     "title": oTitle,
                     "author": oAuthor,
                     "price": oPrice
                 });
-
+                
                 MessageToast.show("New book added successfully.");
             }
 
@@ -87,10 +92,10 @@ sap.ui.define([
             this.byId("inpPrice").setValue(oSelectedData.price);
 
             // Change button text
-            var oSaveButton = this.byId("saveButton") || sap.ui.getCore().byId(this.getView().createId("saveButton"));
-            if (oSaveButton) {
-                oSaveButton.setText("Update");
-            }
+            // var oSaveButton = this.byId("saveButton") || sap.ui.getCore().byId(this.getView().createId("saveButton"));
+            // if (oSaveButton) {
+            //     oSaveButton.setText("Update");
+            // }
 
             this._oDialog.open();
         },
@@ -104,7 +109,8 @@ sap.ui.define([
                 return;
             }
 
-            var oContext = oSelected.getBindingContext();
+            var oContext = oSelected.getBindingContext(); //get bindingcontext returns an specific model data
+            console.log(oContext);
             if (oContext) {
                 var oBookID = oContext.getObject().ID;
                 oContext.delete("$auto").then(
@@ -116,7 +122,44 @@ sap.ui.define([
                     }
                 );
             }
+        },
+
+        onMigrate: function () {
+            var oTable = this.byId("bookTable"); // Find the table in the view
+            var oSelected = oTable.getSelectedItem(); // Get the selected row
+        
+            //   Check if an item is selected
+            if (!oSelected) {
+                MessageToast.show("Please select a record to migrate");
+                return; // Stop execution if no selection
+            }
+        
+            var oContext = oSelected.getBindingContext(); // Get binding context
+        
+            //   Check if binding context exists
+            if (!oContext) {
+                MessageToast.show("No binding context found!");
+                return;
+            }
+        
+            var oData = oContext.getObject();
+            console.log(oData) // Get selected row's data
+            var that = this;
+        
+            //   Use Axios to call the migration function in backend
+            axios.post("/odata/v4/app/migrateData", { ID: oData.ID })
+                .then(function (response) {
+                    MessageToast.show(response.data.value); // Show success message
+                    console.log("Migration Response:", response.data);
+                    that.getView().getModel().refresh(); // Refresh the UI
+                })
+                .catch(function (error) {
+                    MessageToast.show("Error: " + error.message);
+                    console.error("Migration Error:", error);
+                });
+                //navi to enthapage
         }
+        
     });
 
 });
